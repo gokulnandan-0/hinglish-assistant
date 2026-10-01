@@ -1,0 +1,10 @@
+{
+  "$comment": "Unit prices in USD used for per-turn cost telemetry (PRD §14). PLACEHOLDERS - fill from the Azure pricing pages for your region/tier before budgeting.",
+  "sttPerAudioHour": 1.0,
+  "ttsPerMillionChars": 15.0,
+  "llm": {
+    "tutor": { "inputPerMillion": 0.4, "cachedInputPerMillion": 0.1, "outputPerMillion": 1.6 },
+    "kids": { "inputPerMillion": 0.4, "cachedInputPerMillion": 0.1, "outputPerMillion": 1.6 },
+    "summary": { "inputPerMillion": 2.0, "cachedInputPerMillion": 0.5, "outputPerMillion": 8.0 }
+  }
+}

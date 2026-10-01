@@ -1,0 +1,14 @@
+# Local dev dependencies. Azure services (Speech, OpenAI, Content Safety) are real and come from .env.
+name: nova-tutor
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: nova
+      POSTGRES_PASSWORD: nova
+      POSTGRES_DB: nova
+    ports: ["5433:5432"]
+    tmpfs: ["/var/lib/postgresql/data"]
+  redis:
+    image: redis:7.4-alpine
+    ports: ["6380:6379"]

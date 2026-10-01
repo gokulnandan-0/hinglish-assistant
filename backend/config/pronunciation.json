@@ -1,0 +1,343 @@
+{
+  "$comment": "Pronunciation coaching policy. Config, not code: tune per L1 after human calibration (PRD §4, §10). Phonemes are IPA.",
+  "thresholds": {
+    "default": 60,
+    "byL1": {
+      "hi": 60,
+      "ta": 58,
+      "te": 58,
+      "bn": 60,
+      "mr": 60,
+      "kn": 58,
+      "ml": 57,
+      "gu": 60
+    },
+    "byAgeBand": {
+      "kid": -5,
+      "teen": 0,
+      "adult": 0
+    },
+    "highFrequencyWordThresholdDelta": 5,
+    "drillPass": 75,
+    "drillMaxAttempts": 3,
+    "enUsPhonemeCalibration": 8,
+    "$comment": "enUsPhonemeCalibration: points added to en-US phoneme scores (en-US model is harsher on Indian speech). Calibrate against human ratings."
+  },
+  "acceptedVariants": [
+    {
+      "id": "retroflex-t",
+      "expected": [
+        "t"
+      ],
+      "heard": [
+        "t",
+        "ʈ",
+        "*"
+      ],
+      "note": "Retroflex /t/ is standard Indian English"
+    },
+    {
+      "id": "retroflex-d",
+      "expected": [
+        "d"
+      ],
+      "heard": [
+        "d",
+        "ɖ",
+        "*"
+      ],
+      "note": "Retroflex /d/ is standard Indian English"
+    },
+    {
+      "id": "v-w-merger",
+      "expected": [
+        "v",
+        "w"
+      ],
+      "heard": [
+        "v",
+        "w",
+        "ʋ"
+      ],
+      "note": "v/w merger (ʋ) is intelligible"
+    },
+    {
+      "id": "rhotic-r",
+      "expected": [
+        "r",
+        "ɝ",
+        "ɚ"
+      ],
+      "heard": [
+        "*"
+      ],
+      "note": "Rhotic and tapped /r/ are accepted"
+    }
+  ],
+  "downweighted": [
+    {
+      "id": "dental-theta",
+      "expected": [
+        "θ"
+      ],
+      "heard": [
+        "t",
+        "t̪"
+      ],
+      "weight": 0.3,
+      "note": "Dental stop for /θ/: low severity"
+    },
+    {
+      "id": "dental-eth",
+      "expected": [
+        "ð"
+      ],
+      "heard": [
+        "d",
+        "d̪"
+      ],
+      "weight": 0.3,
+      "note": "Dental stop for /ð/: low severity"
+    }
+  ],
+  "intelligibilityRules": [
+    {
+      "id": "vowel-length-i",
+      "kind": "phoneme_swap",
+      "pairs": [
+        [
+          "i",
+          "ɪ"
+        ]
+      ],
+      "impact": 1.0,
+      "profileKey": "phoneme:i-ɪ",
+      "tip": "long /iː/ vs short /ɪ/ changes the word (sheep vs ship)"
+    },
+    {
+      "id": "vowel-length-u",
+      "kind": "phoneme_swap",
+      "pairs": [
+        [
+          "u",
+          "ʊ"
+        ]
+      ],
+      "impact": 0.9,
+      "profileKey": "phoneme:u-ʊ",
+      "tip": "long /uː/ vs short /ʊ/ changes the word (fool vs full)"
+    },
+    {
+      "id": "z-dz",
+      "kind": "phoneme_swap",
+      "pairs": [
+        [
+          "z",
+          "dʒ"
+        ]
+      ],
+      "impact": 0.9,
+      "profileKey": "phoneme:z-dʒ",
+      "tip": "/z/ (zoo) vs /dʒ/ (jam)"
+    },
+    {
+      "id": "s-ʃ",
+      "kind": "phoneme_swap",
+      "pairs": [
+        [
+          "s",
+          "ʃ"
+        ]
+      ],
+      "impact": 0.8,
+      "profileKey": "phoneme:s-ʃ",
+      "tip": "/s/ (sip) vs /ʃ/ (ship)"
+    },
+    {
+      "id": "p-f",
+      "kind": "phoneme_swap",
+      "pairs": [
+        [
+          "f",
+          "p"
+        ]
+      ],
+      "impact": 0.8,
+      "profileKey": "phoneme:f-p",
+      "tip": "/f/ uses teeth on lip; /p/ is a lip pop"
+    },
+    {
+      "id": "ae-e",
+      "kind": "phoneme_swap",
+      "pairs": [
+        [
+          "æ",
+          "ɛ"
+        ]
+      ],
+      "impact": 0.6,
+      "profileKey": "phoneme:æ-ɛ",
+      "tip": "/æ/ (bad) vs /ɛ/ (bed)"
+    },
+    {
+      "id": "final-consonant",
+      "kind": "final_consonant_drop",
+      "impact": 0.9,
+      "profileKey": "phoneme:final_consonant",
+      "tip": "say the last sound of the word clearly"
+    },
+    {
+      "id": "s-cluster",
+      "kind": "s_cluster_epenthesis",
+      "impact": 0.8,
+      "profileKey": "phoneme:s_cluster",
+      "tip": "start directly with 's' - no 'i' sound before it (school, not ischool)"
+    },
+    {
+      "id": "word-omission",
+      "kind": "miscue",
+      "errors": [
+        "Omission"
+      ],
+      "impact": 0.7,
+      "profileKey": "phoneme:omission",
+      "tip": "try to say every word"
+    },
+    {
+      "id": "generic-low",
+      "kind": "generic_low_score",
+      "impact": 0.4,
+      "profileKey": "phoneme:generic",
+      "tip": ""
+    }
+  ],
+  "l1Priority": {
+    "$comment": "Which rules to coach first per L1 (higher = earlier). Missing rule ids get 1.0.",
+    "hi": {
+      "s-cluster": 1.5,
+      "z-dz": 1.4,
+      "vowel-length-i": 1.3,
+      "p-f": 1.1
+    },
+    "ta": {
+      "vowel-length-i": 1.3,
+      "s-ʃ": 1.3,
+      "final-consonant": 1.2,
+      "z-dz": 1.2
+    },
+    "te": {
+      "vowel-length-i": 1.3,
+      "z-dz": 1.3,
+      "final-consonant": 1.2
+    },
+    "bn": {
+      "s-ʃ": 1.5,
+      "z-dz": 1.4,
+      "vowel-length-i": 1.2
+    },
+    "mr": {
+      "z-dz": 1.4,
+      "vowel-length-i": 1.3,
+      "s-cluster": 1.2
+    },
+    "kn": {
+      "z-dz": 1.3,
+      "vowel-length-i": 1.3,
+      "final-consonant": 1.1
+    },
+    "ml": {
+      "final-consonant": 1.4,
+      "vowel-length-i": 1.3,
+      "z-dz": 1.2
+    },
+    "gu": {
+      "z-dz": 1.5,
+      "s-ʃ": 1.3,
+      "ae-e": 1.2,
+      "vowel-length-i": 1.2
+    }
+  },
+  "neutralWords": {
+    "$comment": "Hinglish / Indian proper nouns never flagged for pronunciation (code-switching, PRD §4). Also fed to the STT phrase list.",
+    "words": [
+      "chai",
+      "yaar",
+      "accha",
+      "achha",
+      "haan",
+      "nahi",
+      "ji",
+      "beta",
+      "didi",
+      "bhaiya",
+      "namaste",
+      "arre",
+      "theek",
+      "hai",
+      "matlab",
+      "bas",
+      "chalo",
+      "roti",
+      "dal",
+      "dosa",
+      "idli",
+      "biryani",
+      "samosa",
+      "paneer",
+      "lassi",
+      "auto",
+      "rickshaw",
+      "diwali",
+      "holi",
+      "pongal",
+      "onam",
+      "eid",
+      "durga",
+      "puja",
+      "ganesh",
+      "chaturthi",
+      "navratri",
+      "cricket",
+      "kabaddi",
+      "rupees",
+      "lakh",
+      "crore",
+      "mumbai",
+      "delhi",
+      "chennai",
+      "kolkata",
+      "bengaluru",
+      "bangalore",
+      "hyderabad",
+      "pune",
+      "ahmedabad",
+      "jaipur",
+      "kochi",
+      "lucknow"
+    ]
+  },
+  "highFrequencyWords": [
+    "the",
+    "a",
+    "is",
+    "are",
+    "i",
+    "you",
+    "we",
+    "they",
+    "this",
+    "that",
+    "think",
+    "three",
+    "very",
+    "water",
+    "school",
+    "because",
+    "people",
+    "want",
+    "going",
+    "have",
+    "what",
+    "with"
+  ]
+}
