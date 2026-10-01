@@ -1,8 +1,9 @@
-# Nova tutor backend
+# Hinglish Assistant
 
 A voice-first English speaking tutor for Indian learners, built on Azure. Stack: TypeScript, Node 22, Fastify, WebSocket.
-It implements `../ai-spoken-english-tutor-docs.md`, with the model-flow changes explained in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+It implements the [product specification](docs/PRODUCT_SPEC.md), with the model-flow changes explained in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
+- **[docs/PRODUCT_SPEC.md](docs/PRODUCT_SPEC.md):** product requirements and user experience
 - **[docs/AZURE_REQUIREMENTS.md](docs/AZURE_REQUIREMENTS.md):** which Azure resources to create and which keys go into `.env`
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):** model analysis, turn pipeline, protocol, compliance, evaluation
 
@@ -38,6 +39,7 @@ src/
   providers/                  speech | tts | llm | safety | storage (each behind an interface)
   db/                         migrations, repository, seed
 config/                       pronunciation.json (thresholds, accepted variants, L1 priority), scenarios.json, pricing.json
+docs/                         product specification, architecture, Azure setup
 eval/                         evaluation harness + fixtures
 infra/main.bicep              IaC (Central India + South India); dev.bicepparam
 ```
